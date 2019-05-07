@@ -1,0 +1,13 @@
+# Development-Enviroment =  Visual Studio Code
+django==2.0.7
+Pillow==5.3.0
+# python==3.7.0
+gunicorn==19.9.0
+
+# heroku/7.22.9 win32-x64 node-v11.10.1
+
+
+#python first
+#django second
+#your apps
+#local directory

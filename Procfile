@@ -1,0 +1,1 @@
+web: gunicorn video_recording_app.wsgi:application

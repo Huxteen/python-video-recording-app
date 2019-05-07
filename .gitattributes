@@ -1,0 +1,9 @@
+# This ignores my stylesheet and html files
+
+static/* linguist-vendored
+video_recording_app/static/* linguist-vendored
+video_recording_app/templates/* linguist-vendored
+dashboard/templates/* linguist-vendored
+dashboard/templates/dashboard/* linguist-vendored
+accounts/templates/* linguist-vendored
+accounts/templates/accounts* linguist-vendored
