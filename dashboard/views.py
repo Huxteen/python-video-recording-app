@@ -28,6 +28,19 @@ def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
 
+
+# Process and redirect login form data
+@login_required(login_url="/accounts/login")
+def record(request):
+    return render(request, 'dashboard/video_recording.html')
+
+# Process and redirect login form data
+@login_required(login_url="/accounts/login")
+def record_two(request):
+    return render(request, 'dashboard/video_recording_two.html')
+
+
+
 @login_required(login_url="/accounts/login")
 def request_loan(request):
     if request.method == "POST":

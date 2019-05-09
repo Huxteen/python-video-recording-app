@@ -64,8 +64,9 @@ def signup(request):
                     password=form.cleaned_data['password1'],
                     first_name=form.cleaned_data['first_name'],
                     last_name=form.cleaned_data['last_name'],
-                    phone_no=form.cleaned_data['phone_no'],
-                    bvn=form.cleaned_data['bvn'],
+                    phone_no=19090909090,
+                    email_confirmed=True,
+                    bvn=1234567891,
                 )
 
                 # send_mail(subject, message, from_email, to_list, fail_silently=True)

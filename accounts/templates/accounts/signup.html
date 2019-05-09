@@ -4,7 +4,7 @@
 {% block content %}
 {% load static %}
 <div class="col-md-5 center-block mt-5 py-5 box-shadow sign-up-container">
-<div class="col-md-12 sign-up-title">SIGN UP TO CASH</div>
+<div class="col-md-12 sign-up-title">SIGN UP TO VID</div>
 
 
     <!-- Django attribute to catch error or successful message dynamically -->
@@ -54,7 +54,7 @@
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
-         <div class="row">
+         {% comment %} <div class="row">
             <div class="form-group col-md-6">
                 <label for="exampleInputPhoneNumber">Phone Number</label>
                 <input type="text" maxlength="14" class="form-control" name="phone_no" placeholder="Phone Number" required="required">
@@ -63,7 +63,7 @@
                 <label for="exampleInputBVN">BVN</label>
                 <input type="number" max="9999999999" id="bvn-validation" onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;" class="form-control" name="bvn" placeholder="BVN" required="required">
             </div>
-        </div>
+        </div> {% endcomment %}
 
        
         <div class="row">

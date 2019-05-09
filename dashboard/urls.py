@@ -13,6 +13,8 @@ from dashboard.views import (
     view_all_repayment,
     approve_repayment,
     change_image,
+    record_two,
+    record,
 
     )
 
@@ -21,6 +23,8 @@ urlpatterns = [
     path('', dashboard, name='dashboard'),
     path('request-loan', request_loan, name='request_loan'),
     path('my-loan', my_loan, name='my_loan'),
+    path('record', record, name='record'),
+    path('record_two', record_two, name='record_two'),
     path('change-image', change_image, name='change_image'),
     path('approve-loan/<int:loan_id>/', approve_loan, name='approve_loan'),
     path('approve-repayment/<int:loan_id>/',

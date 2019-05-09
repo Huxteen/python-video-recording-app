@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Augustine O.">
-     <meta name="description" content="Making Your Dreams Come True." />
-    <meta name="keywords" content="Saves, Loan, apply" />
-    <title> SelfVid | Need to record your screen in a easy way.</title>
+     <meta name="description" content="Need to record your screen in an easy way." />
+    <meta name="keywords" content="Video, video recording, video capturing, selfvid" />
+    <title> SelfVid | Need to record your screen in an easy way.</title>
 
     <!-- core CSS -->
     <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -27,6 +27,11 @@
 
     <!--CSS Magnific Pop up - Used in the gallery section to create an image modal and next button for seamless experience.-->
     <link rel="stylesheet" href="{% static 'assets/plugins/magnific-popup/magnific-popup.css' %}">
+
+    <!--CSS Record RTC that allows you to to make video capturing. -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/record_rtc/custom_css.css' %}">
+
+
    
 </head>
 <!--/head-->
@@ -61,12 +66,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                                     {% if user.is_staff %}
-                                        <li><a href="{% url 'view_all_loans' %}">View all loans</a></li>
-                                        <li><a href="{% url 'view_all_repayment' %}">View all repayment</a></li>
-                                        <li><a href="#">Declined loan</a></li>
+                                        <li><a href="{% url 'view_all_loans' %}">View all Video</a></li>
                                     {% else %}
-                                        <li><a href="{% url 'request_loan' %}">Request a loan</a></li>
-                                        <li><a href="{% url 'my_loan' %}">My Loan</a></li>
+                                        <li><a href="{% url 'my_loan' %}">My Video</a></li>
                                     {% endif %}                           
                                 </ul>
                             </li>
@@ -150,7 +152,16 @@
 
     <!--JS Magnific Pop up - Used in the gallery section to create an image modal and next button for seamless experience.-->
     <script rel="text/javascript" src="{% static 'assets/plugins/magnific-popup/jquery.magnific-popup.js' %}"></script>
-    <script rel="text/javascript" src="{% static 'assets/plugins/magnific-popup/custom-hook.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'assets/plugins/magnific-popup/custom-hook.js' %}"></script> 
+
+
+    <!-- JS Record RTC that allows you to to make video capturing. -->
+    <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/RecordRTC.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/EBML.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/adapter-latest.js' %}"></script>
+    <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/custom_record_rtc.js' %}"></script>
+    
+    
        
 </body>
 </html>

@@ -8,49 +8,20 @@
     <div class="container">
        <div class="row">
         <div class="col-md-12 pad-md-0">
-            <div class="col-md-3">
-                <div class="col-md-12 pad-md-0">
-                    <div class="col-md-10 pad-md-0 center-block avater-container">
-                        {% if user.avatar %}
-                            <img src="{{user.avatar.url}}" height="200px" width="200px" class="dashboard_image_settings">
-                        {% else %}
-                            <img src="{% static 'assets/images/user_profile.png' %}" height="200px" width="200px" class="dashboard_image_settings">
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="col-md-12 pad-md-0">
-                    <div class="col-md-10 pad-md-0 center-block dashboard-button">
-                        <form method="POST" action="{% url 'change_image' %}" class="if-profile-image-change" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="cropitIconUpload" >
-                                <label class="cropitCustomIconUpload">
-                                    <input  type="file" name="avatar" class="new-profile-image">
-                                    Change Image
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-12 pad-md-0">
-                    <div class="col-md-10 pad-md-0 center-block dashboard-button">
-                        <a href="{% url 'dashboard' %}">
-                            <button class="btn btn-success col-md-12 margin-top-10 primary-bg-btn"> <strong>Dashboard</strong> </button>
-                        </a>
-                    </div>
-                </div>
+            
 
-            </div>
+            <div class="col-md-12 video-record-dashboard">
+            
+                <h1 style>Need to record your screen in an easy way ?</h1>
 
-            <div class="col-md-9">
-            <p>
-                </p><strong>Loan amount.</strong> </i> What is the minimum and maximum amount the lender lets you apply for and is it enough?</i></p>
-                <p><strong>Loan terms.</strong> <i>What are the minimum and maximum loan terms? Usually terms of between two and seven years are available, but it differs between providers.</i></p> 
-                <p><strong> Fees.</strong> <i>Check for fees such as charges you pay to take out the loan and ongoing costs such as monthly or annual fees.</i></p>
-                <p><strong>Interest rate.</strong> <i>Is the rate fixed or variable? Is it competitive?</i></p>
-                <p><strong>Repayment amount.</strong> <i>Once you know your loan amount and terms, you can use a loan repayment calculator to see if the repayments will be affordable on your budget.</i></p>
-                <p> <strong>Repayment terms.</strong><i> Can you choose your repayment schedule? Can you make extra repayments without a fee? Can you repay the loan early without penalty? </i></p>
+                <br>
 
-            </p>
+                <button id="btn-start-recording" class="btn btn-success margin-right-15">Start Recording</button>
+                <button id="btn-stop-recording" disabled class="btn btn-warning margin-left-15">Stop Recording</button>
+
+                <hr>
+                <video controls autoplay playsinline></video>
+
 
             </div>
         </div>
