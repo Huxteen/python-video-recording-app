@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+
+
+<div class="container">
+  <h2>Hello {{user.get_full_name|title}},</h2>
+  <p>A list of all loan request and their status.</p>  
+
+
+<div class="col-md-6 pad-md-0">
+   <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %} 
+</div>
+
+
+
+  <table class="table table-bordered">
+    <thead>
+        <tr class="table-active">
+            <td colspan="5" class="text-center"><strong>LOAN TABLE</strong></td>
+        </tr>
+        <tr>
+            <th>Bank Name</th>
+            <th>Account Name</th>
+            <th>Account Number</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for all_loan in all_loans %}
+
+        <tr>
+            <td>{{all_loan.bank_name|title}}</td>
+            <td>{{all_loan.account_name|title}}</td>
+            <td>{{all_loan.account_number}}</td>
+            <td>₦&nbsp;{{all_loan.amount}}</td>
+            <td>
+            {% if all_loan.approve_or_decline and all_loan.admin_user != None %}
+                <button class="btn btn-success margin-top-0 margin-right-0">Approved</button>
+
+            {% elif all_loan.approve_or_decline == False and all_loan.admin_user != None %}
+                <button class="btn btn-warning margin-top-0 margin-right-0">Declined Loan</button>
+            {% else %}
+                <form method="POST" action="{% url 'approve_loan' all_loan.pk  %}" class="sign-up-form">
+                    {% csrf_token %}
+                    <input type="hidden" value="decline" name="status"/>
+                    <button type="submit" class="btn btn-danger pull-right margin-top-0">Decline</button>
+                </form>
+
+                <form method="POST" action="{% url 'approve_loan' all_loan.pk %}" class="sign-up-form">
+                    {% csrf_token %}
+                    <input type="hidden" value="approve" name="status"/>
+                    <button type="submit" class="btn btn-info pull-right margin-top-0 margin-right-10">Approve</button>
+                </form>
+                {% comment %} <button class="btn btn-info margin-top-0 margin-right-0">Approve</button>
+                <button class="btn btn-danger margin-top-0 margin-right-0">Decline</button> {% endcomment %}
+            {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+            <tr class="table-active">
+                <td colspan="5" class="text-center"><strong>No recent entries.</strong></td>
+            </tr>
+
+    {% endfor %}
+      
+     
+    </tbody>
+  </table>
+</div>
+
+   
+ 
+
+
+{% endblock %}

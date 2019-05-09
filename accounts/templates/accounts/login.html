@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+<div class="col-md-4 center-block mt-5 py-5 box-shadow login-container">
+    <div class="col-md-12 login-title">LOGIN TO CASH</div>
+
+    
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if 'error' in message.tags %}
+                    <strong>Whoops! &nbsp; </strong> {{ message }}.
+                    {% if resend %}
+                        <p><button type="submit" class="btn btn-primary center-block margin-top-10" data-toggle="modal" data-target="#resendActivationLink">Resend Activation Link</button></p>
+                    {% endif %}
+                {% else %}
+                    <div><strong>Congratulations! &nbsp; </strong> {{ message }}.</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+       
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %} 
+
+   
+
+    <form method="POST" action="{% url 'login' %}" class="login-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email Address">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+        </div>
+        <button type="submit" class="btn btn-primary">LOGIN</button>
+    </form>
+</div>
+
+   
+
+
+
+
+    <!-- Modal -->
+    <div id="resendActivationLink" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header resend-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Resend Activation Link</h4>
+        </div>
+            <div class="row">
+                <div class="col-md-12 margin-top-30">
+                    <form method="POST" action="{% url 'resend_email_verification' %}">
+                        {% csrf_token %}
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" name="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email Address">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        
+                        <div class="modal-footer col-md-12">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary margin-top-0">Send Activation Link</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+
+
+
+{% endblock %}

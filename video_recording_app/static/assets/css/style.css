@@ -1,0 +1,528 @@
+/* custom Design */
+
+.base-content-container{
+  min-height: calc(80vh - 120px);
+}
+.avater-container{
+  border: 1px solid #eee;
+}.dashboard_image_settings{
+  border-radius: 50%;
+}
+
+
+
+
+
+
+ /* Custom upload button */
+.iconUpload input[type="file"] {
+    display: none;
+}
+.cropitIconUpload input[type="file"] {
+    display: none;
+}
+
+.cropitCustomIconUpload{
+  background: #47b475;
+  opacity: 0.8;
+  z-index: 999;
+  border-radius: 4px 4px 4px 4px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  color: #fff;
+  margin-top: 15px;
+  text-align: center;
+  cursor: pointer;
+  width: 220px;
+}
+.customIconUpload{
+  background: transparent;
+  /* background: #38b143; */
+  opacity: 1;
+  z-index: 999;
+  border-radius: 4px;
+  padding: 7px 10px;
+  color: #fff;
+  cursor: pointer;
+  /* float: left;
+  margin-left: 12px; */
+}.cropitCustomIconUpload:hover{
+  opacity: 1;
+}.float-left{
+  float: left;
+}.float-right{
+  float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pad-md-0{
+  padding : 0px;
+}.pad-md-5{
+  padding : 5px;
+}.pad-md-10{
+  padding : 10px;
+}.center-block{
+	float: none;
+	margin: 0 auto;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+
+.primary-bg-btn{
+  background: #47b475 !important;
+  border: 2px solid #47b475 !important;
+  opacity: 0.8;
+}
+
+.primary-bg-btn:hover, .primary-bg-btn:active, .primary-bg-btn:focus{
+ opacity: 1;
+ color: #fff;
+}
+
+.secondary-bg{
+    background: #4FCDFF !important;
+}.primary-bg{
+    background: #47b475 !important;
+}
+.bg-color{
+  color: #47b475 !important;
+}
+.secondary-color{
+    color: #47b475 !important;
+}.primary-color{
+    color: #47b475 !important;
+}.margin-right-0{
+  margin-right: 0px;
+}.approve-data{
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+  padding: 10px;
+}.added-padding{
+  padding-top: 7px;
+  padding-bottom: 7px;
+}.account_details_page{
+  border-bottom: 2px solid #eee;
+  margin-bottom: 30px;
+}.margin-right-10{
+  margin-right: 10px;
+}
+
+/* style for account creation app */
+
+.alert-error{color:#721c24;background-color:#f8d7da;border-color:#f5c6cb}
+.alert-error hr{border-top-color:#f5c6cb}
+.alert-error .alert-link{color:#721c24}
+
+.errorlist{
+  margin-bottom: -20px !important;
+}.sup{
+  color: red;
+  font-size: 14px;
+}
+
+
+
+.padding-top-30{
+  padding-top: 30px;
+}.margin-top-30{
+  margin-top: 30px;
+}.margin-top-0{
+  margin-top: 0px;
+}.resend-header{
+  background: #47b475;
+  color: #fff !important;
+}.resend-header h4, .resend-header button{
+  color: #fff !important;
+}.margin-top-10{
+  margin-top: 10px;
+}
+
+
+
+
+
+/* Custom radio button style */
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #47b475;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+
+
+
+
+
+
+/* This styling for the dashboard Page: */
+.add-border{
+  border: 1px solid #eee;
+}.box-shadow{
+  box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
+  -o-box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
+  -moz-box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
+}.cardBox{
+  padding: 30px 5px 30px 5px; 
+  border-radius: 4px;
+}.deviceSection{
+  border: 1px solid #eee; 
+}.deviceIconX{
+  height: 43px; 
+  width: 43px;
+  text-align: center;
+  border-radius: 50%;
+}.deviceSectionIconWhite{
+  background: #f7f7f8; 
+  color: #dd5347; 
+}.deviceIconX i{
+  font-size: 23px;
+  margin-top: 9px;
+}.deviceSectionPrice{
+  margin-top: 30px;
+}.deviceSectionSecond{
+  text-align: right;
+}.secondP{
+  font-size: 25px;
+  color: #dd5347;
+  margin-bottom: 0px;
+}.secondPercent{
+  margin-top: 14px;
+}
+
+/* The Dashboard Green Background Color: */
+.deviceSectionG{
+  /* border: 1px solid #0bb70b;  */
+  border: 1px solid #47b475; 
+  background: #47b475;
+  color: #fff;
+}.deviceSectionIconG{
+  background: #f8f8f8; 
+  color: #47b475; 
+}.secondPG{
+  font-size: 25px;
+  color: #fff;
+  margin-bottom: 0px;
+}
+/* The Dashboard Red Background Color: */
+.deviceSectionR{
+  border: 1px solid #b4b41f;
+  background:#bebe1f;;
+  color: #fff;
+}.deviceSectionIconR{
+  background: #f8f8f8; 
+  color: #b4b41f;;
+}
+/* The Dashboard Red Background Color: */
+.deviceSectionB{
+  border: 1px solid #1c89aa;  
+  background: #1c89aa;
+  color: #fff;
+}.deviceSectionIconB{
+  background: #f8f8f8; 
+  color: #1c89aa; 
+}
+/* Device List */
+.deviceList{
+  border: 1px solid #8a8a02;
+  border-radius: 4px;
+  color: #444;
+}.deviceList .list-header{
+  background: #c6c605;
+  margin-top:0px;
+  border: 2px solid #c6c605;
+  border-radius: 2px 2px 0px 0px;
+  padding: 6px 5px 6px 5px;
+  font-size: 16px;
+  color: #eee;
+  font-weight: 600;  
+}.list-header i{
+  font-size: 16px;
+}
+.cardDeviceListContainer{
+  background: #eee;
+  color: #444;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 3px 5px 10px 5px;
+  border-radius: 0px 0px 4px 4px;
+}.cardDeviceListContainer .card-title, .cardDeviceListContainer .card-number{
+  font-size: 15px;
+  margin-bottom: 2px;
+}.cardDeviceListContainer .card-icon{
+  margin-top: 10px;
+}.cardSiteMapImg{
+   border: 1px solid #eee; 
+  border-radius: 4px;
+  color: #444;
+  height: 255px;
+}
+
+/*The New Work On*/
+.pad-left-0{
+  padding-left: 4px !important;
+  }.marginTopDashboard{
+  margin-top: 30px;
+}.marginBottomDashboardLast{
+  margin-bottom: 80px;
+}.deviceSectionT{
+  background: #c6c605;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 8px 8px 8px;
+}.deviceSectionT i{
+  font-size: 16px;
+}.deviceTableHeader{
+  font-weight: 600;
+}.scrollableTableBox{
+  overflow-y: scroll; 
+  height: 255px;
+}.deviceSensorLogBox{
+  border-radius: 4px;
+  border: 1px solid #c6c605;
+}.moreSpace{
+  margin-right: 10px;
+}
+
+
+
+/* style about section */
+/* #good-health-about{
+  margin-bottom: 100px;
+} */
+.about-first-good-health{
+  background: #47b475;
+  color: #fff;
+  padding-top: 180px;
+  padding-bottom: 180px;
+}.about-second-good-health{
+  background: #1c89aa;
+  color: #fff;
+   padding-top: 180px;
+  padding-bottom: 180px;
+}.about-icon{
+  font-size: 65px;
+}.about-first-good-health h1, .about-second-good-health h1{
+  color: #fff;
+}
+#about-you-btn,
+#about-you-btn:focus,
+#about-you-btn:hover,
+#about-you-btn:active {
+  background-color: #fff;
+  color: #47b475;
+  font-weight: 600;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 2px solid #fff;
+  margin-top: 20px;
+}
+#about-family-button,
+#about-family-button:focus,
+#about-family-button:hover,
+#about-family-button:active {
+  background-color: #fff;
+  color: #1c89aa;
+  font-weight: 600;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 2px solid #fff;
+  margin-top: 20px;
+
+}.primary-color{
+  color: #47b475 !important;
+}.secondary-color{
+  color: #1c89aa !important;
+}
+
+
+
+/* Design for sign up, login, and create medical report container */
+.sign-up-container, .login-container{
+  padding-bottom: 30px;
+  margin-top: 50px;
+}.sign-up-title, .login-title{
+  background: #47b475;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 12px;
+  margin-top: 15px;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+}.sign-up-form, .login-form{
+  margin-top: 15px !important;
+}
+
+
+/* Medical-statistics style */
+.each-statistics-section{
+  margin-bottom: 30px;
+}.each-statistics-section i{
+  font-size: 35px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}.first-statistics-p{
+  font-size: 35px;
+  margin-bottom: 5px;
+}.percentage-statistics{
+  font-size: 18px;
+  margin-bottom: 15px;
+}.title-of-illness{
+  font-size: 16px;
+  padding-top: 15px;
+  padding-bottom: 7px;
+}.first-p-container{
+  margin-bottom: 10px;
+}.first-p-container small{
+  color: #999;
+}.statistic-bg-green{
+  background: #47b475;
+  color: #fff;
+}.statistic-bg-blue{
+  background: #1c89aa;
+  color: #fff;
+}
+
+
+/* my medical report page style */
+.my-medical-report{
+  padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 993px) and (max-width: 1200px)
+{
+
+
+}
+
+@media (min-width: 769px) and (max-width: 992px)
+{
+
+
+}
+
+@media (min-width: 480px) and (max-width: 768px)
+{
+
+
+.pad-sm-0{
+  padding : 0px;
+}.pad-sm-5{
+  padding : 5px;
+}.pad-sm-10{
+  padding : 10px;
+}
+
+
+}
+
+@media (min-width: 0px) and (max-width: 479px)
+{
+
+.pad-xs-0{
+  padding : 0px;
+}.pad-xs-5{
+  padding : 5px;
+}.pad-xs-8{
+  padding : 8px;
+}.pad-xs-10{
+  padding : 10px;
+}
+
+
+}

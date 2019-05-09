@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+
+
+<div class="container">
+
+
+
+  <h2>Hello {{user.get_full_name|title}},</h2>
+  {{form.as_p}}
+  <p>A list of all your loan request and their status.</p> 
+
+  <div class="col-md-6 pad-md-0">
+   <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %} 
+</div>
+
+  <table class="table table-bordered">
+    <thead>
+        <tr class="table-active">
+            <td colspan="5" class="text-center"><strong>My loan table</strong></td>
+        </tr>
+        <tr>
+            <th>Bank Name</th>
+            <th>Account Name</th>
+            <th>Account Number</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for my_loan in my_loans %}
+
+        <tr>
+            <td>{{my_loan.bank_name|title}}</td>
+            <td>{{my_loan.account_name|title}}</td>
+            <td>{{my_loan.account_number}}</td>
+            <td>₦&nbsp;{{my_loan.amount}}</td>
+            <td>
+            {% if my_loan.approve_or_decline and my_loan.admin_user != None %}
+                {% if my_loan.repayment_status == 1 %}
+                    <button class="btn btn-secondary margin-top-0 margin-right-0" style="margin-right:0px;">Processing Repayment</button>
+                {% elif my_loan.repayment_status == 2 %}
+                    <button class="btn btn-success margin-top-0 margin-right-0" style="margin-right:0px;">Approved Repayment</button>
+                {% elif my_loan.repayment_status == 3 %}
+                    <button class="btn btn-danger margin-top-0 margin-right-0" style="margin-right:0px;">Repayment Declined</button>
+                {% else %}
+                    <button class="btn btn-warning margin-top-0 margin-right-0" style="margin-right:0px;" data-toggle="modal" data-target="#loanRepayment{{my_loan.pk}}">Repayment</button>
+                {% endif %}
+            {% elif not my_loan.approve_or_decline and my_loan.admin_user != None %}
+                <button class="btn btn-danger margin-top-0 margin-right-0">Loan Has been declined</button>
+            {% else %}
+                <button class="btn btn-secondary margin-top-0 margin-right-0">Pending</button>
+            {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+            <tr class="table-active">
+                <td colspan="5" class="text-center"><strong>No recent entries.</strong></td>
+            </tr>
+
+    {% endfor %}
+      
+     
+    </tbody>
+  </table>
+</div>
+
+
+
+{% for my_loan in my_loans %}
+<!-- Modal -->
+<div id="loanRepayment{{my_loan.pk}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header resend-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Loan Repayment</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-12 margin-top-30">
+                    <div class="col-md-12 text-center account_details_page">
+                        <div class="col-md-12 pad-md-0">
+                            <strong><p>Bank Name</p></strong>
+                            <p>Guaranty Trust Bank Plc</p>
+                        </div>
+                        <div class="col-md-6 pad-md-0">
+                            <strong><p>Account Name</p></strong>
+                            <p>Quick Cash Loam Limited</p>
+                        </div>
+                        <div class="col-md-6 pad-md-0">
+                            <strong><p>Account Number</p></strong>
+                            <p>9123445869</p>
+                        </div>
+                    </div>
+                   <form method="POST" action="{% url 'make_repayment' my_loan.pk %}" class="sign-up-form" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputDescription">Description</label>
+                            <textarea name="description" class="form-control" placeholder="Input any proof of payment">
+                            </textarea>
+                        </div>
+
+                        <input type="hidden" name="loan_id" value={{my_loan.pk}} required="required" >
+
+                         <div class="form-group col-md-12">
+                            <label for="exampleInputAmount">Amount Paid</label>
+                            <input type="text" class="form-control" name="amount" onKeyDown="if(this.value.length==20 && event.keyCode!=18) return false;"  placeholder="Amount" required="required">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputTeamImg">Upload Proof</label>
+                            <input type="file" name="repayment_img" class="form-control" required="required">
+                        </div>
+                        
+                        <div class="modal-footer col-md-12">
+                            <button type="submit" class="btn btn-primary margin-top-0">submit a repayment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+
+
+
+   
+ 
+
+
+{% endblock %}

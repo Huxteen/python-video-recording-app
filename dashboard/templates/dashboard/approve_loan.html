@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+<div class="col-md-4 mt-5 col-md-offset-4 py-5 box-shadow sign-up-container">
+<div class="col-md-12 sign-up-title text-center">APPROVE LOAN</div>
+
+
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %} 
+
+
+
+<div class="col-md-12 pad-md-0">
+    <div class="col-md-12 pad-md-0">
+        {% for loan in approve_loan %}
+            <div class="col-md-12 text-center approve-data">
+                <strong><p>Bank Name </p></strong>
+                <p>{{loan.bank_name}} </p>
+            </div>
+            <div class="col-md-12 text-center approve-data">
+                <strong><p>Account Name </p></strong>
+                <p>{{loan.account_name}}</p>
+             </div>
+            <div class="col-md-12 text-center approve-data">
+                <strong><p>Account Number </p></strong>
+                <p>{{loan.account_number}} </p>
+            </div>
+            <div class="col-md-12 text-center approve-data">
+                <strong><p>Amount </p></strong>
+                <p>₦&nbsp;{{loan.amount}} </p>
+            </div>
+       
+ 
+            {% if loan.admin_user == None and loan.approve_or_decline == False %}
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <form method="POST" action="{% url 'approve_loan' loan.pk %}" class="sign-up-form">
+                            {% csrf_token %}
+                            <input type="hidden" value="approve" name="status"/>
+                            <button type="submit" class="btn btn-primary pull-right margin-top-0">Approve</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form method="POST" action="{% url 'approve_loan' loan.pk %}" class="sign-up-form">
+                            {% csrf_token %}
+                            <input type="hidden" value="decline" name="status"/>
+                            <button type="submit" class="btn btn-danger add-padding">Decline</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <button type="submit" class="btn btn-primary add-padding center-block">A decision has been taken on this loan request.</button>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+   
+
+
+</div>
+{% endblock %}

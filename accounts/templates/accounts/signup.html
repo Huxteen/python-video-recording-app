@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+<div class="col-md-5 center-block mt-5 py-5 box-shadow sign-up-container">
+<div class="col-md-12 sign-up-title">SIGN UP TO CASH</div>
+
+
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %} 
+
+    <form method="POST" action="{% url 'signup' %}" class="sign-up-form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="exampleInputFirstName">First Name</label>
+                <input type="text" class="form-control" name="first_name" placeholder="First Name" required="required">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputLastName">Last Name</label>
+                <input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email Address"
+                required="required">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+         <div class="row">
+            <div class="form-group col-md-6">
+                <label for="exampleInputPhoneNumber">Phone Number</label>
+                <input type="text" maxlength="14" class="form-control" name="phone_no" placeholder="Phone Number" required="required">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputBVN">BVN</label>
+                <input type="number" max="9999999999" id="bvn-validation" onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;" class="form-control" name="bvn" placeholder="BVN" required="required">
+            </div>
+        </div>
+
+       
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" name="password1" placeholder="Enter Password" required="required">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputPassword2">Confirm Password</label>
+                <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required="required">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">SIGN UP</button>
+    </form>
+</div>
+{% endblock %}
