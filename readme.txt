@@ -1,10 +1,10 @@
 {% comment %} The Images used in this project are free stock photos {% endcomment %}
 
 slider 1:
-https://www.pexels.com/photo/person-counting-money-with-smartphones-in-front-on-desk-210990/
+https://www.pexels.com/photo/adult-analogue-aperture-black-and-white-403495/
 
 slider 2:
-https://www.pexels.com/photo/person-holding-100-us-dollar-banknotes-2068975/
+https://www.pexels.com/photo/adult-app-blur-bokeh-318540/
 
 How To Use
 1. download the file(Zip, Github etc). 
