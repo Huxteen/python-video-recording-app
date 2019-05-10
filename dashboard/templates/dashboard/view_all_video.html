@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<section style="background: #eee;">
+    <div class="container">
+       <div class="row">
+        <div class="col-md-12 pad-md-0">
+        <div class="col-md-6">
+
+            <!-- Django attribute to catch error or successful message dynamically -->
+            {% if messages %}
+                <div class="messages col-md-12 pad-md-0">
+                {% for message in messages %}
+                    <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% if 'error' in message.tags %}
+                            <strong>Whoops! &nbsp; </strong> {{ message }}.
+                            {% if resend %}
+                                <p><button type="submit" class="btn btn-primary center-block margin-top-10" data-toggle="modal" data-target="#resendActivationLink">Resend Activation Link</button></p>
+                            {% endif %}
+                        {% else %}
+                            <div><strong>Congratulations! &nbsp; </strong> {{ message }}.</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+            
+
+
+
+            <div class="col-md-12 video-record-dashboard pad-md-0">
+                {% for video in all_videos %}
+                    <div class="col-md-4 my_video_container">
+                        <div class="col-md-12 pad-md-0 box-shadow border-radius">
+                            <video class="col-md-12 pad-md-0" controls autoplay playsinline src="{{video.video_name.url}}"> </video>
+                            
+                            <div class="col-md-12 pad-md-0 my_video_button">
+                                
+                                {% if video.status and video.admin_id != None %}
+                                    <div class="col-md-12 pad-md-0">
+                                        <button class="btn btn-success center-block">Approved</button>
+                                    </div>
+                                {% elif video.status == False and video.admin_id != None %}
+                                    <div class="col-md-12 pad-md-0">
+                                        <button class="btn btn-warning center-block">Declined</button>
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-6 pad-md-0">
+                                        <form method="POST" action="{% url 'review_video' video.pk  %}" >
+                                            {% csrf_token %}
+                                            <input type="hidden" value="decline" name="status"/>
+                                            <button type="submit" class="btn btn-danger center-block" onclick="return confirm('Are you sure you want to decline this video')">Decline</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="col-md-6 pad-md-0">
+                                        <form method="POST" action="{% url 'review_video' video.pk %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="approve" name="status"/>
+                                            <button type="submit" class="btn btn-info center-block" onclick="return confirm('Are you sure you want to approve this video')">Approve</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {% empty %}
+                        <div class="col-md-12 pad-md-0">
+                            <h3 class="text-center"><strong>There is no video for review at this time.</strong></h3>
+                        </div>
+
+
+                {% endfor %}
+            </div>
+
+        </div>
+       </div>
+    </div>
+</section>
+
+{% endblock %}

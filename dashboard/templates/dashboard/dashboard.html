@@ -8,22 +8,56 @@
     <div class="container">
        <div class="row">
         <div class="col-md-12 pad-md-0">
+        <div class="col-md-6">
+
+            <!-- Django attribute to catch error or successful message dynamically -->
+            {% if messages %}
+                <div class="messages col-md-12 pad-md-0">
+                {% for message in messages %}
+                    <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% if 'error' in message.tags %}
+                            <strong>Whoops! &nbsp; </strong> {{ message }}.
+                            {% if resend %}
+                                <p><button type="submit" class="btn btn-primary center-block margin-top-10" data-toggle="modal" data-target="#resendActivationLink">Resend Activation Link</button></p>
+                            {% endif %}
+                        {% else %}
+                            <div><strong>Congratulations! &nbsp; </strong> {{ message }}.</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
             
 
-            <div class="col-md-12 video-record-dashboard">
-            
-                <h1 style>Need to record your screen in an easy way ?</h1>
-
-                <br>
-
-                <button id="btn-start-recording" class="btn btn-success margin-right-15">Start Recording</button>
-                <button id="btn-stop-recording" disabled class="btn btn-warning margin-left-15">Stop Recording</button>
-
-                <hr>
-                <video controls autoplay playsinline></video>
 
 
+            <div class="col-md-12 video-record-dashboard pad-md-0">
+                <div class="col-md-8 center-block">
+                    <h3 >Need to record your screen in an easy way ?</h3>
+
+                    {% if user.is_staff %}
+                        <div class="capture-button-container col-md-12">
+                            <button id="btn-start-recording" disabled class="btn btn-success margin-right-15">Apply</button>
+
+                            <button id="btn-stop-recording" disabled class="btn btn-warning margin-left-15">Upload</button>
+                        </div>
+                            <small class="text-center admin-notification"> admins are not allowed to record video at this time.</small>
+                        
+                    {% else %}
+                        <div class="capture-button-container col-md-12">
+                            <button id="btn-start-recording" class="btn btn-success margin-right-15">Apply</button>
+
+                            <button id="btn-stop-recording" disabled class="btn btn-warning margin-left-15">Upload</button>
+                        </div>
+                    {% endif %}
+
+                    <video class="col-md-9 center-block box-shadow video-caption-box pad-md-0" controls autoplay playsinline></video>
+                </div>
             </div>
+
         </div>
        </div>
     </div>

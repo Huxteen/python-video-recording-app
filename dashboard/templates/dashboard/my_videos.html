@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<section style="background: #eee;">
+    <div class="container">
+       <div class="row">
+        <div class="col-md-12 pad-md-0">
+        <div class="col-md-6">
+
+            <!-- Django attribute to catch error or successful message dynamically -->
+            {% if messages %}
+                <div class="messages col-md-12 pad-md-0">
+                {% for message in messages %}
+                    <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% if 'error' in message.tags %}
+                            <strong>Whoops! &nbsp; </strong> {{ message }}.
+                            {% if resend %}
+                                <p><button type="submit" class="btn btn-primary center-block margin-top-10" data-toggle="modal" data-target="#resendActivationLink">Resend Activation Link</button></p>
+                            {% endif %}
+                        {% else %}
+                            <div><strong>Congratulations! &nbsp; </strong> {{ message }}.</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+            
+
+
+
+            <div class="col-md-12 video-record-dashboard pad-md-0">
+                {% for video in my_videos %}
+                    <div class="col-md-4 my_video_container">
+                        <div class="col-md-12 pad-md-0 box-shadow">
+                            <video class="col-md-12 pad-md-0" controls autoplay playsinline src="{{video.video_name.url}}"> </video>
+                            
+                            <div class="col-md-12 pad-md-0 my_video_button">
+                                
+                                    {% if video.status and video.admin_id != None %}
+                                        <div class="col-md-12 pad-md-0">
+                                            <button class="btn btn-success center-block">Approved</button>
+                                        </div>
+                                    {% elif video.status == False and video.admin_id != None %}
+                                        <div class="col-md-12 pad-md-0">
+                                            <button class="btn btn-warning center-block">Declined</button>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-6 pad-md-0">
+                                            <button class="btn btn-secondary center-block">Pending</button>
+                                        </div>
+
+                                        <div class="col-md-6 pad-md-0">
+                                            <form method="POST" action="{% url 'delete_video' video.pk %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-danger center-block" onclick="return confirm('Are you sure you want to delete this video')">Delete</button>
+                                            </form>
+                                        </div>
+
+                                    {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                {% empty %}
+                    <div class="col-md-12 pad-md-0">
+                        <h3 class="text-center"><strong>You have no video(s) at this time.</strong></h3>
+                    </tr>
+
+
+                {% endfor %}
+            </div>
+
+        </div>
+       </div>
+    </div>
+</section>
+
+{% endblock %}

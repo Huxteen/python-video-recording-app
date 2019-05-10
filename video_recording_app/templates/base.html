@@ -66,9 +66,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                                     {% if user.is_staff %}
-                                        <li><a href="{% url 'view_all_loans' %}">View all Video</a></li>
+                                        <li><a href="{% url 'view_all_video' %}">View all Video</a></li>
                                     {% else %}
-                                        <li><a href="{% url 'my_loan' %}">My Video</a></li>
+                                        <li><a href="{% url 'my_videos' %}">My Video</a></li>
                                     {% endif %}                           
                                 </ul>
                             </li>
@@ -160,6 +160,7 @@
     <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/EBML.js' %}"></script>
     <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/adapter-latest.js' %}"></script>
     <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/custom_record_rtc.js' %}"></script>
+    {% comment %} <script rel="text/javascript" src="{% static 'assets/plugins/record_rtc/custom_rtc.js' %}"></script>  {% endcomment %}
     
     
        

@@ -65,15 +65,14 @@ def signup(request):
                     first_name=form.cleaned_data['first_name'],
                     last_name=form.cleaned_data['last_name'],
                     phone_no=19090909090,
-                    email_confirmed=True,
                     bvn=1234567891,
                 )
 
                 # send_mail(subject, message, from_email, to_list, fail_silently=True)
-                subject = 'QuickCash Email Verification'
+                subject = 'SelfVid Email Verification'
 
-                current_site = "http://127.0.0.1:8000/accounts/email-verification" 
-                # current_site = get_current_site(request)
+                # current_site = "http://127.0.0.1:8000/accounts/email-verification" 
+                current_site = str(get_current_site(request)) + '/accounts/email-verification'
                 uid = (user.pk)
                 token = account_activation_token.make_token(user)
 
@@ -140,10 +139,10 @@ def resend_email_verification(request):
                 return redirect('login')
 
             # send_mail(subject, message, from_email, to_list, fail_silently=True)
-            subject = 'QuickCash Email Verification'
+            subject = 'SelfVid Email Verification'
 
-            current_site = "http://127.0.0.1:8000/accounts/email-verification"
-            # current_site = get_current_site(request)
+            # current_site = "http://127.0.0.1:8000/accounts/email-verification"
+            current_site = str(get_current_site(request)) + '/accounts/email-verification'
             uid = (user.pk)
             token = account_activation_token.make_token(user)
 

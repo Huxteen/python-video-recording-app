@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+<div class="col-md-4 mt-5 col-md-offset-4 py-5 box-shadow sign-up-container">
+<div class="col-md-12 sign-up-title text-center">REVIEW VIDEO</div>
+
+
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+   
+
+<div class="col-md-12 pad-md-0">
+    <div class="col-md-12 pad-md-0">
+        {% comment %} {% for video in review_video %} {% endcomment %}
+            <div class="col-md-12 my_video_container">
+                <div class="col-md-12 pad-md-0 box-shadow">
+                    <video class="col-md-12 pad-md-0" controls autoplay playsinline src="{{review_video.video_name.url}}"> </video>
+                    
+                    <div class="col-md-12 pad-md-0 my_video_button">
+                        
+                        {% if review_video.status == False and review_video.admin_id == None %}
+                            <div class="col-md-6 pad-md-0">
+                                <form method="POST" action="{% url 'review_video' review_video.pk %}" class="sign-up-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="approve" name="status"/>
+                                    <button type="submit" class="btn btn-primary center-block margin-top-0" onclick="return confirm('Are you sure you want to approve this video')">Approve</button>
+                                </form>
+                            </div>
+
+                            <div class="col-md-6 pad-md-0">
+                                <form method="POST" action="{% url 'review_video' review_video.pk %}" class="sign-up-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="decline" name="status"/>
+                                    <button type="submit" class="btn btn-danger center-block add-padding" onclick="return confirm('Are you sure you want to decline this video')">Decline</button>
+                                </form>
+                            </div>
+                        {% else %}
+                            <button type="submit" class="btn btn-primary add-padding center-block">A decision has been taken on this video.</button>
+                        {% endif %}
+
+                   
+                    </div>
+                </div>
+            </div>
+        {% comment %} {% endfor %} {% endcomment %}
+    </div>
+</div>
+
+            
+    
+
+
+</div>
+
+
+{% endblock %}

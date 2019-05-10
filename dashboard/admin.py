@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Loan, Repayment
+from .models import VideoRecord
 
-admin.site.register(Loan)
-admin.site.register(Repayment)
+admin.site.register(VideoRecord)
